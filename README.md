@@ -16,9 +16,7 @@
     style="max-width: 100%; transform: rotate(180deg);">
   </video>
 </p>
-<p align="center">
-  <img src="resources/images/screens/banner_game_bug_storm.svg" alt="Bug_Storm" width="100%"/>
-</p>
+
 
 ---
 
