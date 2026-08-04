@@ -1,4 +1,4 @@
-﻿#include "scr_game.h"
+#include "scr_game.h"
 
 #include "button.h"
 #include "app_bsp.h"
@@ -496,18 +496,22 @@ static void draw_ship(int x, int y) {
 }
 
 static void view_scr_game() {
+	const int display_score = (score > 999999) ? 999999 : score;
+	const int display_wave = (wave > 99) ? 99 : wave;
+	const int display_high_score = (high_score > 999999) ? 999999 : high_score;
+
 	view_render.setTextSize(1);
 	view_render.setTextColor(WHITE);
 	view_render.setCursor(0, 0);
 	view_render.print("S:");
-	view_render.print(score);
-	view_render.setCursor(51, 0);
+	view_render.print(display_score);
+	view_render.setCursor(50, 0);
 	view_render.print("W:");
-	view_render.print(wave);
-	view_render.setCursor(73, 0);
+	view_render.print(display_wave);
+	view_render.setCursor(78, 0);
 	view_render.print("P:");
 	view_render.print(shot_level);
-	view_render.setCursor(98, 0);
+	view_render.setCursor(102, 0);
 	view_render.print("V:");
 	view_render.print(lives);
 	view_render.drawLine(0, 8, LCD_WIDTH - 1, 8, WHITE);
@@ -556,7 +560,7 @@ static void view_scr_game() {
 	if (next_wave_ticks > 0) {
 		view_render.fillRect(22, 24, 80, 17, BLACK);
 		view_render.drawRoundRect(22, 24, 80, 17, 3, WHITE);
-		view_render.setCursor(35, 30);
+		view_render.setCursor(29, 30);
 		view_render.print("WAVE CLEAR!");
 	}
 
@@ -567,9 +571,9 @@ static void view_scr_game() {
 		view_render.print("GAME OVER");
 		view_render.setCursor(29, 32);
 		view_render.print("BEST:");
-		view_render.print(high_score);
-		view_render.setCursor(20, 41);
-		view_render.print("PRESS TO RESTART");
+		view_render.print(display_high_score);
+		view_render.setCursor(23, 41);
+		view_render.print("PRESS ANY KEY");
 	}
 }
 

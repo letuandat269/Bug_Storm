@@ -35,7 +35,7 @@ make --version
 ## 2. Project layout
 
 ```text
-chicken_invaders_1bit/
+Bug_Storm/
 ├── application/                 Application firmware at 0x08003000
 │   ├── Makefile
 │   └── sources/
@@ -54,7 +54,7 @@ application/sources/app/screens/scr_game.cpp
 ## 3. Build
 
 ```bash
-cd ~/chicken_invaders_1bit/application
+cd ~/Bug_Storm/application
 make clean
 make -j"$(nproc)"
 ```

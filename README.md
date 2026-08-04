@@ -1,12 +1,13 @@
 <div align="center">
 
 ![MCU](https://img.shields.io/badge/MCU-STM32L151CBT6-03234B?style=flat-square&logo=stmicroelectronics)
-![Display](https://img.shields.io/badge/OLED-124x60_1--bit-white?style=flat-square&labelColor=black)
+![Display](https://img.shields.io/badge/OLED-128x64_1--bit-white?style=flat-square&labelColor=black)
 ![Firmware](https://img.shields.io/badge/Firmware-v1.1.0.0-blue?style=flat-square)
 
 </div>
 
 # Bug_Storm - Game built on AK Embedded Base Kit
+
 <p align="center">
   <video
     src="https://github.com/user-attachments/assets/cace2061-e597-41b6-9cb5-8d4b5ea76f48"
@@ -15,7 +16,6 @@
     style="max-width: 100%; transform: rotate(180deg);">
   </video>
 </p>
-
 <p align="center">
   <img src="resources/images/screens/banner_game_bug_storm.svg" alt="Bug_Storm" width="100%"/>
 </p>
@@ -25,7 +25,7 @@
 ## Gameplay Preview
 
 <div align="center">
-  <img src="resources/images/screens/scr_gameplay.svg" alt="Bug_Storm gameplay" width="744"/>
+  <img src="resources/images/screens/scr_gameplay.png" alt="Bug_Storm gameplay" width="744"/>
 </div>
 
 ## Documentation
@@ -100,11 +100,11 @@ Flash Partitions
 
 ### II. Game Description and Objects
 
-Bug_Storm runs on a logical **124 x 60 pixel**, 1-bit framebuffer. The upper 9 pixels display the HUD; the remaining area contains the Bug formation, Boss, projectiles, Gifts and Player Ship.
+The OLED framebuffer is **128 x 64 pixels, 1-bit**. Gameplay uses a safe logical area of **124 x 60 pixels** so text, sprites and borders do not touch the panel edges. The upper 9 logical pixels display the HUD; the remaining area contains the Bug formation, Boss, projectiles, Gifts and Player Ship.
 
 <table align="center">
   <tr>
-    <td align="center"><img src="resources/images/screens/scr_menu.svg" alt="Bug_Storm game menu" width="620"/></td>
+    <td align="center"><img src="resources/images/screens/scr_menu.png" alt="Bug_Storm game menu" width="620"/></td>
   </tr>
 </table>
 <p align="center"><strong><em>Figure 3:</em></strong> Main menu.</p>
@@ -117,7 +117,7 @@ The current startup menu contains:
 
 <table align="center">
   <tr>
-    <td align="center"><img src="resources/images/screens/scr_gameplay.svg" alt="Bug_Storm gameplay screen" width="744"/></td>
+    <td align="center"><img src="resources/images/screens/scr_gameplay.png" alt="Bug_Storm gameplay screen" width="744"/></td>
   </tr>
 </table>
 <p align="center"><strong><em>Figure 4:</em></strong> Gameplay screen.</p>
@@ -163,10 +163,36 @@ The current startup menu contains:
 
 <table align="center">
   <tr>
-    <td align="center"><img src="resources/images/screens/scr_game_over.svg" alt="Bug_Storm game over" width="620"/></td>
+    <td align="center"><img src="resources/images/screens/scr_game_over.png" alt="Bug_Storm game over" width="620"/></td>
   </tr>
 </table>
 <p align="center"><strong><em>Figure 5:</em></strong> Game Over screen.</p>
+
+#### Generate Documentation Images from the OLED Framebuffer
+
+Figures 3, 4 and 5 are pixel-perfect PNG files generated from the same **128 x 64, 1024-byte** page-layout framebuffer used by the OLED driver. The enlarged images use nearest-neighbor scaling, so every firmware pixel remains sharp and measurable.
+
+To capture any live screen from the board:
+
+1. Open the firmware serial shell and navigate to the screen that must be documented.
+2. Enter `lcd d`. The shell prints data between `[DUMP] frame buffer lcd => start` and `[DUMP] frame buffer lcd => end`.
+3. Copy the complete output into a text file.
+4. Convert the dump with the included tool:
+
+```bash
+python3 tools/framebuffer_to_png.py capture.txt resources/images/screens/capture.png --scale 6
+```
+
+Reproducible reference dumps for the documented screens are stored in [`resources/framebuffer`](resources/framebuffer). For example:
+
+```bash
+python3 tools/framebuffer_to_png.py \
+  resources/framebuffer/scr_gameplay.txt \
+  resources/images/screens/scr_gameplay.png \
+  --scale 6
+```
+
+The converter validates that exactly `1024` bytes are present before writing the PNG, preventing incomplete terminal captures from being added to the documentation.
 
 ### IV. Bug_Storm Runtime Sequence by Time Thread
 

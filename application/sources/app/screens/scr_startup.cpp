@@ -30,25 +30,13 @@ void view_scr_startup() {
 	view_render.clear();
 
 	if (startup_show_logo) {
-		view_render.setTextColor(WHITE);
-		view_render.setTextSize(2);
-		view_render.setCursor(44, 7);
-		view_render.print("BUG");
-		view_render.setTextSize(1);
-		view_render.setCursor(47, 27);
-		view_render.print("STORM");
-		view_render.drawLine(57, 43, 51, 53, WHITE);
-		view_render.drawLine(57, 43, 63, 53, WHITE);
-		view_render.drawLine(51, 53, 63, 53, WHITE);
-		view_render.fillRect(56, 48, 3, 6, WHITE);
-		view_render.drawPixel(57, 39, WHITE);
-		view_render.drawPixel(57, 36, WHITE);
+		view_render.drawBitmap(12, 0, epd_bitmap_Screenshot_2026_06_11_110945, 103, 64, WHITE);
 		return;
 	}
 
-	startup_draw_item(2, "Bug_Storm", 0, startup_menu_index == 0);
-	startup_draw_item(23, "Cai dat", 1, startup_menu_index == 1);
-	startup_draw_item(44, "Thong ke", 2, startup_menu_index == 2);
+	startup_draw_item(1, "Bug_Storm", 0, startup_menu_index == 0);
+	startup_draw_item(21, "Cai dat", 1, startup_menu_index == 1);
+	startup_draw_item(41, "Thong ke", 2, startup_menu_index == 2);
 }
 
 static void startup_draw_item(int y, const char* text, uint8_t icon, bool selected) {
