@@ -14,6 +14,17 @@ The player controls a spacecraft that fires automatically, destroys formations o
 
 The game includes progressive wave difficulty, three Player lives, scoring, a high-score record, sound effects and a compact interface designed for three physical buttons.
 
+## Game Objects
+
+| Bitmap | Object | Description |
+|:---:|---|---|
+| <img src="resources/images/bitmap/ship.svg" width="64" alt="Player Ship"/> | **Player Ship** | Moves horizontally, fires automatically and starts with three lives. |
+| <img src="resources/images/bitmap/bullet.svg" height="48" alt="Bullet"/> | **Bullet** | Travels upward and damages Bugs or the Boss. |
+| <img src="resources/images/bitmap/bug.svg" width="64" alt="Bug"/> | **Bug** | Flies in formation, moves toward the Player and awards points when destroyed. |
+| <img src="resources/images/bitmap/egg.svg" height="48" alt="Egg"/> | **Egg** | Falls from Bugs or the Boss and removes one Player life on impact. |
+| <img src="resources/images/bitmap/gift.svg" width="48" alt="Gift"/> | **Gift** | Increases firepower from one to a maximum of four simultaneous shots. |
+| <img src="resources/images/bitmap/boss.svg" width="96" alt="Boss"/> | **Boss** | Appears after each formation is cleared and must be defeated to advance. |
+
 ## Video Demo
 
 <p align="center">
