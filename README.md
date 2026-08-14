@@ -27,10 +27,10 @@ The game includes progressive wave difficulty, three Player lives, scoring, a hi
 
 ## Gameplay Bitmap Interface
 
-The following image represents the 128 x 64 monochrome OLED frame generated from the game's 1-bit bitmap objects. The status bar shows Score (`S`), Wave (`W`), Power (`P`) and remaining Lives (`V`).
+This is the actual 128 x 64 framebuffer rendered by the firmware and exported with the `lcd d` command. Every visible pixel comes directly from the drawing code in `scr_game.cpp`; the status bar shows Score (`S`), Wave (`W`), Power (`P`) and remaining Lives (`V`).
 
 <p align="center">
-  <img src="resources/images/screens/scr_gameplay.svg" width="744" alt="Bug_Storm 1-bit gameplay interface"/>
+  <img src="resources/images/screens/scr_gameplay.png" width="768" alt="Bug_Storm framebuffer captured from the firmware"/>
 </p>
 
 ## Button-to-End-Game Logic
