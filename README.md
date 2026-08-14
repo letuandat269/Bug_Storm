@@ -25,6 +25,57 @@ The game includes progressive wave difficulty, three Player lives, scoring, a hi
 | <img src="resources/images/bitmap/gift.svg" width="48" alt="Gift"/> | **Gift** | Increases firepower from one to a maximum of four simultaneous shots. |
 | <img src="resources/images/bitmap/boss.svg" width="96" alt="Boss"/> | **Boss** | Appears after each formation is cleared and must be defeated to advance. |
 
+## Gameplay Bitmap Interface
+
+The following image represents the 128 x 64 monochrome OLED frame generated from the game's 1-bit bitmap objects. The status bar shows Score (`S`), Wave (`W`), Power (`P`) and remaining Lives (`V`).
+
+<p align="center">
+  <img src="resources/images/screens/scr_gameplay.svg" width="744" alt="Bug_Storm 1-bit gameplay interface"/>
+</p>
+
+## Button-to-End-Game Logic
+
+```mermaid
+flowchart TD
+    A[Physical button input] --> B[10 ms button_timer_polling]
+    B --> C[Debounce and classify press]
+    C --> D[BSP callback posts display signal]
+    D --> E[AK message queue]
+    E --> F[Display task and screen manager]
+    F --> G[scr_game_handle]
+
+    G -->|UP pressed| H[Move Player right and clamp X]
+    G -->|DOWN pressed| I[Move Player left and clamp X]
+    G -->|MODE pressed| J[Fire immediately]
+    G -->|MODE held| K[Stop game timer and return to menu]
+    G -->|100 ms GAME_TICK| L[game_update]
+
+    H --> R[Render OLED frame]
+    I --> R
+    J --> R
+    L --> M[Automatic fire and move formation or Boss]
+    M --> N[Move bullets, eggs and gifts]
+    N --> O[Check collisions]
+    O -->|Gift collected| P[Increase Power up to 4]
+    O -->|Bug hit| Q[Reduce bugs_left and add score]
+    Q -->|bugs_left equals 0| S[Start Boss fight]
+    O -->|Boss hit| T[Reduce boss_hp]
+    T -->|boss_hp equals 0| U[Wave Clear delay]
+    U --> V[Increase wave and spawn new formation]
+    O -->|Egg hit or formation reaches Player| W[game_player_hit]
+    W --> X[Decrease lives]
+    X -->|lives greater than 0| Y[Reset Player position and continue]
+    X -->|lives equals 0| Z[Set game_over and stop GAME_TICK]
+    Z --> AA[Display GAME OVER and final score]
+
+    P --> R
+    Q --> R
+    S --> R
+    V --> R
+    Y --> R
+    R --> L
+```
+
 ## Video Demo
 
 <p align="center">
