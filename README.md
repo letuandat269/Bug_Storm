@@ -98,8 +98,8 @@ Bugs release falling Eggs that damage the Player. Destroyed Bugs can drop square
 ## How to Play
 
 1. On the startup menu, select **Bug_Storm** and press `SW4 / MODE`.
-2. Use `SW3 / UP` to move the Player Ship **right** by 5 pixels.
-3. Use `SW2 / DOWN` to move the Player Ship **left** by 5 pixels.
+2. Press the **RIGHT** button to move the Player Ship right by 5 pixels.
+3. Press the **LEFT** button to move the Player Ship left by 5 pixels.
 4. Shooting is automatic. A short `SW4 / MODE` press can request an immediate volley when the fire cooldown permits.
 5. Destroy Bugs while avoiding their falling Eggs.
 6. Collect square Gifts to raise shot power from `P:1` to a maximum of `P:4`.
@@ -186,11 +186,11 @@ sequenceDiagram
 
     rect rgb(30, 85, 135)
         Note left of Player: BUTTON INPUT
-        Player->>AK: SW3 / UP pressed
+        Player->>AK: RIGHT movement button pressed
         AK->>Scr: AC_DISPLAY_BUTON_UP_PRESSED
         Scr->>Game: Move Player right by 5 px and clamp X
 
-        Player->>AK: SW2 / DOWN pressed
+        Player->>AK: LEFT movement button pressed
         AK->>Scr: AC_DISPLAY_BUTON_DOWN_PRESSED
         Scr->>Game: Move Player left by 5 px and clamp X
 

@@ -107,7 +107,7 @@ framebuffer and convert it with `tools/framebuffer_to_png.py`.
 
 - Build cleanly and inspect new compiler warnings.
 - Verify every loop stays inside its fixed pool.
-- Verify UP moves right and DOWN moves left.
+- Verify the RIGHT button moves right and the LEFT button moves left.
 - Verify automatic fire and manual MODE request cannot exceed 20 Bullets.
 - Verify `P:4` is the maximum power level.
 - Verify the Boss appears only after all 18 Bugs are destroyed.

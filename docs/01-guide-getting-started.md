@@ -196,8 +196,8 @@ leave root-owned build files in the source tree.
 1. Reset the board and wait for the startup screen.
 2. Select `Bug_Storm` and press MODE.
 3. Confirm that Wave 1 creates a centered 6 × 3 Bug formation.
-4. Press UP: the ship must move right by 5 px.
-5. Press DOWN: the ship must move left by 5 px.
+4. Press RIGHT: the ship must move right by 5 px.
+5. Press LEFT: the ship must move left by 5 px.
 6. Confirm that bullets fire automatically.
 7. Destroy all 18 Bugs and confirm the Boss appears.
 8. Collect square gifts and verify `P` increases only to 4.
@@ -244,5 +244,5 @@ Do not redraw the game objects by eye because that can differ from the firmware.
 | Board boots old game | Confirm the new `bug-storm.bin` was written at `0x08003000`. |
 | `/dev/ttyUSB0` is denied | Add the user to `dialout`, then sign in again. |
 | `scp` reports `Failure` | Check `df -h /`; a full Linux root filesystem prevents remote writes. |
-| Game controls feel reversed | UP intentionally means move right; DOWN intentionally means move left in current firmware. |
+| Movement labels differ from code signals | Player controls are LEFT/RIGHT; the framework retains the internal signal names `BUTON_DOWN`/`BUTON_UP`. |
 | Mermaid is not visible locally | View the Markdown on GitHub or in a Mermaid-capable preview. |

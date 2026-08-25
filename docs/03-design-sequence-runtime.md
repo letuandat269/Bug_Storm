@@ -124,8 +124,8 @@ sequenceDiagram
 
 | Physical event | AK signal | Active-game action | Game-Over action |
 |---|---|---|---|
-| UP pressed | `AC_DISPLAY_BUTON_UP_PRESSED` | Move Ship right 5 px | Restart game |
-| DOWN pressed | `AC_DISPLAY_BUTON_DOWN_PRESSED` | Move Ship left 5 px | Restart game |
+| RIGHT movement button | `AC_DISPLAY_BUTON_UP_PRESSED` | Move Ship right 5 px | Restart game |
+| LEFT movement button | `AC_DISPLAY_BUTON_DOWN_PRESSED` | Move Ship left 5 px | Restart game |
 | MODE pressed | `AC_DISPLAY_BUTON_MODE_PRESSED` | Request fire; automatic fire remains active | Restart game |
 | MODE held | `AC_DISPLAY_BUTON_MODE_LONG_PRESSED` | Stop tick and return to startup | Return to startup |
 
@@ -135,8 +135,8 @@ flowchart TD
     O -- Yes --> I[game_init]
     I --> T[Restart 100 ms timer]
     O -- No --> K{Which button?}
-    K -- UP --> R[Move Ship right and clamp]
-    K -- DOWN --> L[Move Ship left and clamp]
+    K -- RIGHT --> R[Move Ship right and clamp]
+    K -- LEFT --> L[Move Ship left and clamp]
     K -- MODE short --> F[game_fire]
     K -- MODE long --> X[Remove timer and SCREEN_TRAN startup]
 ```
@@ -379,7 +379,7 @@ sequenceDiagram
     participant Timer
     participant OLED
 
-    Player->>Game: Press UP, DOWN or MODE
+    Player->>Game: Press LEFT, RIGHT or MODE
     Game->>Game: game_init()
     Game->>Game: Recreate Wave 1 and reset score/lives/P
     Game->>Timer: Start periodic 100 ms GAME_TICK

@@ -104,14 +104,14 @@ sequenceDiagram
     participant Game as scr_game_handle
     participant Ship
 
-    Player->>Driver: Press UP or DOWN
+    Player->>Driver: Press RIGHT or LEFT
     Driver->>Queue: Post display button signal
     Queue->>Display: Deliver message
     Display->>Game: Dispatch to active screen
-    alt UP signal
+    alt RIGHT button / internal UP signal
         Game->>Ship: player_x += 5
         Ship->>Ship: Clamp to right boundary
-    else DOWN signal
+    else LEFT button / internal DOWN signal
         Game->>Ship: player_x -= 5
         Ship->>Ship: Clamp to 0
     end
